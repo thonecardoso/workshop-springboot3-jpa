@@ -4,7 +4,6 @@ import com.thonecardoso.course.entities.Order;
 import com.thonecardoso.course.entities.Product;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 import java.io.Serializable;
@@ -16,7 +15,8 @@ public class OrderItemPK implements Serializable {
     @JoinColumn(name = "order_id")
     private Order order;
     @ManyToOne
-    @JoinColumn(name = "product_id")private Product product;
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     public Order getOrder() {
         return order;
