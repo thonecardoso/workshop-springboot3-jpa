@@ -1,8 +1,10 @@
 package com.thonecardoso.course.config;
 
+import com.thonecardoso.course.entities.Category;
 import com.thonecardoso.course.entities.Order;
 import com.thonecardoso.course.entities.User;
 import com.thonecardoso.course.entities.enums.OrderStatus;
+import com.thonecardoso.course.repositories.CategoryRepository;
 import com.thonecardoso.course.repositories.OrderRepository;
 import com.thonecardoso.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception {
         var u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
@@ -32,7 +37,12 @@ public class TestConfig implements CommandLineRunner {
         var o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, u2);
         var o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, u1);
 
+        var cat1 = new Category(null, "Electronics");
+        var cat2 = new Category(null, "Books");
+        var cat3 = new Category(null, "Computers");
+
         userRepository.saveAll(List.of(u1, u2));
         orderRepository.saveAll((List.of(o1, o2, o3)));
+        categoryRepository.saveAll(List.of(cat1,cat2,cat3));
     }
 }
