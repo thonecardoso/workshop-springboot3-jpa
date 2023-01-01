@@ -1,9 +1,11 @@
 package com.thonecardoso.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -14,7 +16,7 @@ public class Category implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "categories")
-    private List<Product> products;
+    private Set<Product> products = new HashSet<>();
 
     public Category() {
     }
@@ -36,9 +38,15 @@ public class Category implements Serializable {
         return name;
     }
 
+   @ManyToMany(mappedBy = "categories")
+   @JsonIgnore
+    public Set<Product> getProducts() {
+        return products;
+    }
     public void setName(String name) {
         this.name = name;
     }
+
 
     @Override
     public boolean equals(Object o) {
