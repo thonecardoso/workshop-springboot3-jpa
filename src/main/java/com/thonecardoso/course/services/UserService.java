@@ -29,4 +29,13 @@ public class UserService {
         var user = repository.findById(id).orElseThrow();
         repository.delete(user);
     }
+
+    public void update(Long id, User userToUpdate) {
+        var user = repository.getReferenceById(id);
+        user.setEmail(userToUpdate.getEmail());
+        user.setName(userToUpdate.getName());
+        user.setPhone(userToUpdate.getPhone());
+
+        repository.save(user);
+    }
 }
