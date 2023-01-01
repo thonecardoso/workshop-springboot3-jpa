@@ -40,11 +40,14 @@ public class UserService {
     }
 
     public void update(Long id, User userToUpdate) {
-        var user = repository.getReferenceById(id);
+        var user = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        updateData(userToUpdate, user);
+        repository.save(user);
+    }
+
+    private void updateData(User userToUpdate, User user) {
         user.setEmail(userToUpdate.getEmail());
         user.setName(userToUpdate.getName());
         user.setPhone(userToUpdate.getPhone());
-
-        repository.save(user);
     }
 }
